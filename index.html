@@ -35,7 +35,7 @@
         h1 {
             color: #0d47a1;
         }
-        #examPositions {
+        #expelledStudents {
             display: none;
         }
 
@@ -160,6 +160,16 @@
             document.getElementById('examPositions').style.display = 'none';
             document.getElementById('dashboard').style.display = 'block';
         }
+
+        function showExpelledStudents() {
+            document.getElementById('dashboard').style.display = 'none';
+            document.getElementById('expelledStudents').style.display = 'block';
+        }
+
+        function closeExpelledStudents() {
+            document.getElementById('expelledStudents').style.display = 'none';
+            document.getElementById('dashboard').style.display = 'block';
+        }
     </script>
 </head>
 <body onload="checkCookies()">
@@ -182,16 +192,21 @@
         <p><strong>Achievements:</strong> <a href="mathOlympiadWinner.html">National Math Olympiad Winner</a>, <a href="bestSwimmerAward.html">Best Swimmer Award</a></p>
         <button onclick="showDateSheet()">View Exam Date Sheet</button>
         <button onclick="showExamPositions()">View Exam Positions</button>
+        <button onclick="showExpelledStudents()">View Expelled Students</button>
         <button onclick="logout()">Logout</button>
+    </div>
+
+    <div class="container" id="expelledStudents" style="display:none;">
+        <h2>Expelled Students</h2>
+        <p class="lava-drip">Ali Raza</p>
+        <p>Student 2: Rachel Green</p>
+        <button onclick="closeExpelledStudents()">Close</button>
     </div>
 
     <div class="container" id="adminDashboard" style="display:none;">
         <h2>Admin Panel</h2>
         <p><strong>School Revenue:</strong> $500,000</p>
         <p><strong>Students with Fines:</strong> John Doe - $50, Jane Smith - $30</p>
-        <h3>Expelled Students</h3>
-        <p class="lava-drip">Ali Raza</p>
-        <p><strong>Student 2:</strong> Rachel Green</p>
         <h3>Student Complaints/Comments</h3>
         <textarea id="studentComments" rows="5" cols="50" placeholder="No comments yet..."></textarea>
         <button onclick="logout()">Logout</button>
@@ -200,18 +215,4 @@
     <div class="container" id="dateSheet" style="display:none;">
         <h2>Exam Date Sheet</h2>
         <p><strong>Mathematics:</strong> 10th March</p>
-        <p><strong>Science:</strong> 12th March</p>
-        <p><strong>English:</strong> 14th March</p>
-        <p><strong>History:</strong> 16th March</p>
-        <button onclick="closeDateSheet()">Close</button>
-    </div>
-
-    <div class="container" id="examPositions" style="display:none;">
-        <h2>Previous Exam Positions</h2>
-        <p><strong>Mathematics:</strong> 1st - Ali Ahmed</p>
-        <p><strong>Science:</strong> 2nd - Sarah Khan</p>
-        <p><strong>English:</strong> 3rd - Hassan Malik</p>
-        <button onclick="closeExamPositions()">Close</button>
-    </div>
-</body>
-</html>
+        <p><strong>Science:</strong> 12th March
