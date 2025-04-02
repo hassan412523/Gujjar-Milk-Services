@@ -38,6 +38,47 @@
         #examPositions {
             display: none;
         }
+
+        .lava-drip {
+            position: relative;
+            font-weight: bold;
+            color: #ff5733;
+            font-size: 1.5em;
+            text-align: center;
+        }
+
+        .lava-drip:before {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            background: #ff5733;
+            border-radius: 50%;
+            animation: drip 1s infinite alternate;
+        }
+
+        @keyframes drip {
+            0% {
+                bottom: -10px;
+                transform: scale(1);
+            }
+            100% {
+                bottom: -30px;
+                transform: scale(1.5);
+            }
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
     </style>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
     <script>
@@ -134,11 +175,11 @@
 
     <div class="container" id="dashboard" style="display:none;">
         <h2>Welcome to LGS JT LMS</h2>
-        <p><strong>Courses:</strong> Mathematics, Science, English</p>
-        <p><strong>Homework Assignments:</strong> Algebra Homework, Chemistry Lab Report</p>
+        <p><strong>Courses:</strong> <a href="mathDetails.html">Mathematics</a>, <a href="scienceDetails.html">Science</a>, <a href="englishDetails.html">English</a></p>
+        <p><strong>Homework Assignments:</strong> <a href="algebraHomework.html">Algebra Homework</a>, <a href="chemistryLabReport.html">Chemistry Lab Report</a></p>
         <p><strong>Extracurriculars:</strong> Debate Club, Music Society, Sports Team</p>
         <p><strong>Notices:</strong> PTA Meeting on Monday, Science Fair Registrations Open</p>
-        <p><strong>Achievements:</strong> National Math Olympiad Winner, Best Swimmer Award</p>
+        <p><strong>Achievements:</strong> <a href="mathOlympiadWinner.html">National Math Olympiad Winner</a>, <a href="bestSwimmerAward.html">Best Swimmer Award</a></p>
         <button onclick="showDateSheet()">View Exam Date Sheet</button>
         <button onclick="showExamPositions()">View Exam Positions</button>
         <button onclick="logout()">Logout</button>
@@ -148,6 +189,9 @@
         <h2>Admin Panel</h2>
         <p><strong>School Revenue:</strong> $500,000</p>
         <p><strong>Students with Fines:</strong> John Doe - $50, Jane Smith - $30</p>
+        <h3>Expelled Students</h3>
+        <p class="lava-drip">Ali Raza</p>
+        <p><strong>Student 2:</strong> Rachel Green</p>
         <h3>Student Complaints/Comments</h3>
         <textarea id="studentComments" rows="5" cols="50" placeholder="No comments yet..."></textarea>
         <button onclick="logout()">Logout</button>
