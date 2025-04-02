@@ -37,55 +37,71 @@
         }
         #expelledStudents {
             display: none;
-            background-color: red;
-            padding: 10px;
-            border-radius: 5px;
+            background-color: red; /* Ensuring red background */
             color: white;
+            font-weight: bold;
+            padding: 20px;
+            border-radius: 10px;
         }
-
         a {
             color: #007bff;
             text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
+            font-weight: bold;
         }
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+    <h1>LGS JT Learning Management System</h1>
+    
+    <div class="container" id="loginPage">
+        <h2>Login</h2>
+        <input type="text" id="username" placeholder="Email">
+        <input type="password" id="password" placeholder="Password">
+        <button onclick="login()">Student Login</button>
+        <button onclick="adminLogin()">Admin Login</button>
+    </div>
+
+    <div class="container" id="dashboard" style="display:none;">
+        <h2>Welcome to LGS JT LMS</h2>
+        <p><strong>Courses:</strong> <a href="#" onclick="showDetails('Courses')">Mathematics, Science, English</a></p>
+        <p><strong>Homework Assignments:</strong> <a href="#" onclick="showDetails('Homework')">Algebra Homework, Chemistry Lab Report</a></p>
+        <p><strong>Extracurriculars:</strong> <a href="#" onclick="showDetails('Extracurriculars')">Debate Club, Music Society, Sports Team</a></p>
+        <p><strong>Achievements:</strong> <a href="#" onclick="showDetails('Achievements')">National Math Olympiad Winner, Best Swimmer Award</a></p>
+        <button onclick="showDateSheet()">View Exam Date Sheet</button>
+        <button onclick="showExamPositions()">View Exam Positions</button>
+        <button onclick="showExpelledStudents()">View Expelled Students</button>
+        <button onclick="logout()">Logout</button>
+    </div>
+
+    <div class="container" id="dateSheet" style="display:none;">
+        <h2>Exam Date Sheet</h2>
+        <p><strong>Mathematics:</strong> 10th March</p>
+        <p><strong>Science:</strong> 12th March</p>
+        <p><strong>English:</strong> 14th March</p>
+        <p><strong>History:</strong> 16th March</p>
+        <button onclick="closeDateSheet()">Close</button>
+    </div>
+
+    <div class="container" id="examPositions" style="display:none;">
+        <h2>Previous Exam Positions</h2>
+        <p><strong>Mathematics:</strong> 1st - Ali Ahmed</p>
+        <p><strong>Science:</strong> 2nd - Sarah Khan</p>
+        <p><strong>English:</strong> 3rd - Hassan Malik</p>
+        <button onclick="closeExamPositions()">Close</button>
+    </div>
+
+    <div class="container" id="expelledStudents" style="display:none;">
+        <h2>Expelled Students</h2>
+        <p><strong>Ali Raza</strong></p>
+        <p><strong>John Doe</strong></p>
+        <button onclick="closeExpelledStudents()">Close</button>
+    </div>
+
     <script>
-        function setCookie(name, value, days) {
-            let date = new Date();
-            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-            document.cookie = name + "=" + value + "; expires=" + date.toUTCString() + "; path=/";
-        }
-
-        function getCookie(name) {
-            let cookies = document.cookie.split('; ');
-            for (let cookie of cookies) {
-                let [key, value] = cookie.split('=');
-                if (key === name) {
-                    return value;
-                }
-            }
-            return "";
-        }
-
-        function checkCookies() {
-            let savedUsername = getCookie("username");
-            let savedPassword = getCookie("password");
-            if (savedUsername && savedPassword) {
-                document.getElementById('username').value = decodeURIComponent(savedUsername);
-                document.getElementById('password').value = decodeURIComponent(savedPassword);
-            }
-        }
-
         function login() {
-            let username = document.getElementById('username').value;
-            let password = document.getElementById('password').value;
-            if (username === "hareemalii786@gmail.com" && password === "12345") {
-                setCookie("username", encodeURIComponent(username), 30);
-                setCookie("password", encodeURIComponent(password), 30);
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+            if(username === "hareemalii786@gmail.com" && password === "12345") {
                 document.getElementById('loginPage').style.display = 'none';
                 document.getElementById('dashboard').style.display = 'block';
             } else {
@@ -94,13 +110,10 @@
         }
 
         function adminLogin() {
-            let username = document.getElementById('username').value;
-            let password = document.getElementById('password').value;
-            if (username === "admin@lgsjt.com" && password === "admin123") {
-                setCookie("username", encodeURIComponent(username), 30);
-                setCookie("password", encodeURIComponent(password), 30);
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+            if(username === "admin@lgsjt.com" && password === "admin123") {
                 document.getElementById('loginPage').style.display = 'none';
-                document.getElementById('adminDashboard').style.display = 'block';
             } else {
                 alert('Invalid admin credentials!');
             }
@@ -108,7 +121,6 @@
 
         function logout() {
             document.getElementById('dashboard').style.display = 'none';
-            document.getElementById('adminDashboard').style.display = 'none';
             document.getElementById('loginPage').style.display = 'block';
         }
 
@@ -125,7 +137,6 @@
         function showExamPositions() {
             document.getElementById('dashboard').style.display = 'none';
             document.getElementById('examPositions').style.display = 'block';
-            confetti();
         }
 
         function closeExamPositions() {
@@ -142,60 +153,10 @@
             document.getElementById('expelledStudents').style.display = 'none';
             document.getElementById('dashboard').style.display = 'block';
         }
+
+        function showDetails(section) {
+            alert(section + " details page coming soon!");
+        }
     </script>
-</head>
-<body onload="checkCookies()">
-    <h1>LGS JT Learning Management System</h1>
-
-    <div class="container" id="loginPage">
-        <h2>Login</h2>
-        <input type="text" id="username" placeholder="Email">
-        <input type="password" id="password" placeholder="Password">
-        <button onclick="login()">Student Login</button>
-        <button onclick="adminLogin()">Admin Login</button>
-    </div>
-
-    <div class="container" id="dashboard" style="display:none;">
-        <h2>Welcome to LGS JT LMS</h2>
-        <p><strong>Courses:</strong> <span>Mathematics</span>, <span>Science</span>, <span>English</span></p>
-        <p><strong>Homework Assignments:</strong> <span>Algebra Homework</span>, <span>Chemistry Lab Report</span></p>
-        <p><strong>Extracurriculars:</strong> Debate Club, Music Society, Sports Team</p>
-        <p><strong>Notices:</strong> PTA Meeting on Monday, Science Fair Registrations Open</p>
-        <p><strong>Achievements:</strong> <span>National Math Olympiad Winner</span>, <span>Best Swimmer Award</span></p>
-        <button onclick="showDateSheet()">View Exam Date Sheet</button>
-        <button onclick="showExamPositions()">View Exam Positions</button>
-        <button onclick="showExpelledStudents()">View Expelled Students</button>
-        <button onclick="logout()">Logout</button>
-    </div>
-
-    <div class="container" id="expelledStudents" style="display:none;">
-        <h2>Expelled Students</h2>
-        <p>Ali Raza</p>
-        <p>Rachel Green</p>
-        <button onclick="closeExpelledStudents()">Close</button>
-    </div>
-
-    <div class="container" id="adminDashboard" style="display:none;">
-        <h2>Admin Panel</h2>
-        <p><strong>School Revenue:</strong> $500,000</p>
-        <p><strong>Students with Fines:</strong> John Doe - $50, Jane Smith - $30</p>
-        <h3>Student Complaints/Comments</h3>
-        <textarea id="studentComments" rows="5" cols="50" placeholder="No comments yet..."></textarea>
-        <button onclick="logout()">Logout</button>
-    </div>
-
-    <div class="container" id="dateSheet" style="display:none;">
-        <h2>Exam Date Sheet</h2>
-        <p><strong>Mathematics:</strong> 10th March</p>
-        <p><strong>Science:</strong> 12th March</p>
-        <button onclick="closeDateSheet()">Close</button>
-    </div>
-
-    <div class="container" id="examPositions" style="display:none;">
-        <h2>Exam Positions</h2>
-        <p><strong>John Doe:</strong> Top of the class</p>
-        <p><strong>Jane Smith:</strong> Second in class</p>
-        <button onclick="closeExamPositions()">Close</button>
-    </div>
 </body>
 </html>
