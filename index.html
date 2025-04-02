@@ -37,37 +37,10 @@
         }
         #expelledStudents {
             display: none;
-        }
-
-        .lava-drip {
-            position: relative;
-            font-weight: bold;
-            color: #ff5733;
-            font-size: 1.5em;
-            text-align: center;
-        }
-
-        .lava-drip:before {
-            content: "";
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            width: 20px;
-            height: 20px;
-            background: #ff5733;
-            border-radius: 50%;
-            animation: drip 1s infinite alternate;
-        }
-
-        @keyframes drip {
-            0% {
-                bottom: -10px;
-                transform: scale(1);
-            }
-            100% {
-                bottom: -30px;
-                transform: scale(1.5);
-            }
+            background-color: red;
+            padding: 10px;
+            border-radius: 5px;
+            color: white;
         }
 
         a {
@@ -78,7 +51,6 @@
         a:hover {
             text-decoration: underline;
         }
-
     </style>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
     <script>
@@ -185,11 +157,11 @@
 
     <div class="container" id="dashboard" style="display:none;">
         <h2>Welcome to LGS JT LMS</h2>
-        <p><strong>Courses:</strong> <a href="mathDetails.html">Mathematics</a>, <a href="scienceDetails.html">Science</a>, <a href="englishDetails.html">English</a></p>
-        <p><strong>Homework Assignments:</strong> <a href="algebraHomework.html">Algebra Homework</a>, <a href="chemistryLabReport.html">Chemistry Lab Report</a></p>
+        <p><strong>Courses:</strong> <span>Mathematics</span>, <span>Science</span>, <span>English</span></p>
+        <p><strong>Homework Assignments:</strong> <span>Algebra Homework</span>, <span>Chemistry Lab Report</span></p>
         <p><strong>Extracurriculars:</strong> Debate Club, Music Society, Sports Team</p>
         <p><strong>Notices:</strong> PTA Meeting on Monday, Science Fair Registrations Open</p>
-        <p><strong>Achievements:</strong> <a href="mathOlympiadWinner.html">National Math Olympiad Winner</a>, <a href="bestSwimmerAward.html">Best Swimmer Award</a></p>
+        <p><strong>Achievements:</strong> <span>National Math Olympiad Winner</span>, <span>Best Swimmer Award</span></p>
         <button onclick="showDateSheet()">View Exam Date Sheet</button>
         <button onclick="showExamPositions()">View Exam Positions</button>
         <button onclick="showExpelledStudents()">View Expelled Students</button>
@@ -198,8 +170,8 @@
 
     <div class="container" id="expelledStudents" style="display:none;">
         <h2>Expelled Students</h2>
-        <p class="lava-drip">Ali Raza</p>
-        <p>Student 2: Rachel Green</p>
+        <p>Ali Raza</p>
+        <p>Harry Gujjar</p>
         <button onclick="closeExpelledStudents()">Close</button>
     </div>
 
@@ -215,4 +187,15 @@
     <div class="container" id="dateSheet" style="display:none;">
         <h2>Exam Date Sheet</h2>
         <p><strong>Mathematics:</strong> 10th March</p>
-        <p><strong>Science:</strong> 12th March
+        <p><strong>Science:</strong> 12th March</p>
+        <button onclick="closeDateSheet()">Close</button>
+    </div>
+
+    <div class="container" id="examPositions" style="display:none;">
+        <h2>Exam Positions</h2>
+        <p><strong>John Doe:</strong> Top of the class</p>
+        <p><strong>Jane Smith:</strong> Second in class</p>
+        <button onclick="closeExamPositions()">Close</button>
+    </div>
+</body>
+</html>
