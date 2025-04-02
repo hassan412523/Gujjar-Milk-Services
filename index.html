@@ -40,10 +40,90 @@
         }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
+    <script>
+        function setCookie(name, value, days) {
+            let date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            document.cookie = name + "=" + value + "; expires=" + date.toUTCString() + "; path=/";
+        }
+
+        function getCookie(name) {
+            let cookies = document.cookie.split('; ');
+            for (let cookie of cookies) {
+                let [key, value] = cookie.split('=');
+                if (key === name) {
+                    return value;
+                }
+            }
+            return "";
+        }
+
+        function checkCookies() {
+            let savedUsername = getCookie("username");
+            let savedPassword = getCookie("password");
+            if (savedUsername && savedPassword) {
+                document.getElementById('username').value = decodeURIComponent(savedUsername);
+                document.getElementById('password').value = decodeURIComponent(savedPassword);
+            }
+        }
+
+        function login() {
+            let username = document.getElementById('username').value;
+            let password = document.getElementById('password').value;
+            if (username === "hareemalii786@gmail.com" && password === "12345") {
+                setCookie("username", encodeURIComponent(username), 30);
+                setCookie("password", encodeURIComponent(password), 30);
+                document.getElementById('loginPage').style.display = 'none';
+                document.getElementById('dashboard').style.display = 'block';
+            } else {
+                alert('Invalid credentials!');
+            }
+        }
+
+        function adminLogin() {
+            let username = document.getElementById('username').value;
+            let password = document.getElementById('password').value;
+            if (username === "admin@lgsjt.com" && password === "admin123") {
+                setCookie("username", encodeURIComponent(username), 30);
+                setCookie("password", encodeURIComponent(password), 30);
+                document.getElementById('loginPage').style.display = 'none';
+                document.getElementById('adminDashboard').style.display = 'block';
+            } else {
+                alert('Invalid admin credentials!');
+            }
+        }
+
+        function logout() {
+            document.getElementById('dashboard').style.display = 'none';
+            document.getElementById('adminDashboard').style.display = 'none';
+            document.getElementById('loginPage').style.display = 'block';
+        }
+
+        function showDateSheet() {
+            document.getElementById('dashboard').style.display = 'none';
+            document.getElementById('dateSheet').style.display = 'block';
+        }
+
+        function closeDateSheet() {
+            document.getElementById('dateSheet').style.display = 'none';
+            document.getElementById('dashboard').style.display = 'block';
+        }
+
+        function showExamPositions() {
+            document.getElementById('dashboard').style.display = 'none';
+            document.getElementById('examPositions').style.display = 'block';
+            confetti();
+        }
+
+        function closeExamPositions() {
+            document.getElementById('examPositions').style.display = 'none';
+            document.getElementById('dashboard').style.display = 'block';
+        }
+    </script>
 </head>
-<body>
+<body onload="checkCookies()">
     <h1>LGS JT Learning Management System</h1>
-    
+
     <div class="container" id="loginPage">
         <h2>Login</h2>
         <input type="text" id="username" placeholder="Email">
@@ -89,57 +169,5 @@
         <p><strong>English:</strong> 3rd - Hassan Malik</p>
         <button onclick="closeExamPositions()">Close</button>
     </div>
-
-    <script>
-        function login() {
-            var username = document.getElementById('username').value;
-            var password = document.getElementById('password').value;
-            if(username === "hareemalii786@gmail.com" && password === "12345") {
-                document.getElementById('loginPage').style.display = 'none';
-                document.getElementById('dashboard').style.display = 'block';
-            } else {
-                alert('Invalid credentials!');
-            }
-        }
-
-        function adminLogin() {
-            var username = document.getElementById('username').value;
-            var password = document.getElementById('password').value;
-            if(username === "admin@lgsjt.com" && password === "admin123") {
-                document.getElementById('loginPage').style.display = 'none';
-                document.getElementById('adminDashboard').style.display = 'block';
-            } else {
-                alert('Invalid admin credentials!');
-            }
-        }
-
-        function logout() {
-            document.getElementById('dashboard').style.display = 'none';
-            document.getElementById('adminDashboard').style.display = 'none';
-            document.getElementById('loginPage').style.display = 'block';
-        }
-
-        function showDateSheet() {
-            document.getElementById('dashboard').style.display = 'none';
-            document.getElementById('dateSheet').style.display = 'block';
-        }
-
-        function closeDateSheet() {
-            document.getElementById('dateSheet').style.display = 'none';
-            document.getElementById('dashboard').style.display = 'block';
-        }
-
-        function showExamPositions() {
-            document.getElementById('dashboard').style.display = 'none';
-            document.getElementById('examPositions').style.display = 'block';
-            // Trigger confetti effect when the tab opens
-            confetti();
-        }
-
-        function closeExamPositions() {
-            document.getElementById('examPositions').style.display = 'none';
-            document.getElementById('dashboard').style.display = 'block';
-        }
-    </script>
 </body>
 </html>
