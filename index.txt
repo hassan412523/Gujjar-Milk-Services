@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LGS JT LMS</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e3f2fd;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            max-width: 600px;
+            margin: auto;
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            cursor: pointer;
+            border: none;
+        }
+        h1 {
+            color: #0d47a1;
+        }
+        #examPositions {
+            display: none;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+    <h1>LGS JT Learning Management System</h1>
+    
+    <div class="container" id="loginPage">
+        <h2>Login</h2>
+        <input type="text" id="username" placeholder="Email">
+        <input type="password" id="password" placeholder="Password">
+        <button onclick="login()">Student Login</button>
+        <button onclick="adminLogin()">Admin Login</button>
+    </div>
+
+    <div class="container" id="dashboard" style="display:none;">
+        <h2>Welcome to LGS JT LMS</h2>
+        <p><strong>Courses:</strong> Mathematics, Science, English</p>
+        <p><strong>Homework Assignments:</strong> Algebra Homework, Chemistry Lab Report</p>
+        <p><strong>Extracurriculars:</strong> Debate Club, Music Society, Sports Team</p>
+        <p><strong>Notices:</strong> PTA Meeting on Monday, Science Fair Registrations Open</p>
+        <p><strong>Achievements:</strong> National Math Olympiad Winner, Best Swimmer Award</p>
+        <button onclick="showDateSheet()">View Exam Date Sheet</button>
+        <button onclick="showExamPositions()">View Exam Positions</button>
+        <button onclick="logout()">Logout</button>
+    </div>
+
+    <div class="container" id="adminDashboard" style="display:none;">
+        <h2>Admin Panel</h2>
+        <p><strong>School Revenue:</strong> $500,000</p>
+        <p><strong>Students with Fines:</strong> John Doe - $50, Jane Smith - $30</p>
+        <h3>Student Complaints/Comments</h3>
+        <textarea id="studentComments" rows="5" cols="50" placeholder="No comments yet..."></textarea>
+        <button onclick="logout()">Logout</button>
+    </div>
+
+    <div class="container" id="dateSheet" style="display:none;">
+        <h2>Exam Date Sheet</h2>
+        <p><strong>Mathematics:</strong> 10th March</p>
+        <p><strong>Science:</strong> 12th March</p>
+        <p><strong>English:</strong> 14th March</p>
+        <p><strong>History:</strong> 16th March</p>
+        <button onclick="closeDateSheet()">Close</button>
+    </div>
+
+    <div class="container" id="examPositions" style="display:none;">
+        <h2>Previous Exam Positions</h2>
+        <p><strong>Mathematics:</strong> 1st - Ali Ahmed</p>
+        <p><strong>Science:</strong> 2nd - Sarah Khan</p>
+        <p><strong>English:</strong> 3rd - Hassan Malik</p>
+        <button onclick="closeExamPositions()">Close</button>
+    </div>
+
+    <script>
+        function login() {
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+            if(username === "hareemalii786@gmail.com" && password === "12345") {
+                document.getElementById('loginPage').style.display = 'none';
+                document.getElementById('dashboard').style.display = 'block';
+            } else {
+                alert('Invalid credentials!');
+            }
+        }
+
+        function adminLogin() {
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+            if(username === "admin@lgsjt.com" && password === "admin123") {
+                document.getElementById('loginPage').style.display = 'none';
+                document.getElementById('adminDashboard').style.display = 'block';
+            } else {
+                alert('Invalid admin credentials!');
+            }
+        }
+
+        function logout() {
+            document.getElementById('dashboard').style.display = 'none';
+            document.getElementById('adminDashboard').style.display = 'none';
+            document.getElementById('loginPage').style.display = 'block';
+        }
+
+        function showDateSheet() {
+            document.getElementById('dashboard').style.display = 'none';
+            document.getElementById('dateSheet').style.display = 'block';
+        }
+
+        function closeDateSheet() {
+            document.getElementById('dateSheet').style.display = 'none';
+            document.getElementById('dashboard').style.display = 'block';
+        }
+
+        function showExamPositions() {
+            document.getElementById('dashboard').style.display = 'none';
+            document.getElementById('examPositions').style.display = 'block';
+            // Trigger confetti effect when the tab opens
+            confetti();
+        }
+
+        function closeExamPositions() {
+            document.getElementById('examPositions').style.display = 'none';
+            document.getElementById('dashboard').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
