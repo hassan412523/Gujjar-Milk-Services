@@ -38,22 +38,18 @@
     </style>
     <script>
         function setCookie(name, value, days) {
-            let expires = "";
-            if (days) {
-                let date = new Date();
-                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-                expires = "; expires=" + date.toUTCString();
-            }
-            document.cookie = name + "=" + value + expires + "; path=/";
+            let date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            document.cookie = name + "=" + value + "; expires=" + date.toUTCString() + "; path=/";
         }
 
         function getCookie(name) {
-            let nameEQ = name + "=";
-            let ca = document.cookie.split(';');
-            for (let i = 0; i < ca.length; i++) {
-                let c = ca[i];
-                while (c.charAt(0) == ' ') c = c.substring(1, c.length);
-                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+            let cookies = document.cookie.split('; ');
+            for (let cookie of cookies) {
+                let [key, value] = cookie.split('=');
+                if (key === name) {
+                    return value;
+                }
             }
             return "";
         }
@@ -62,8 +58,8 @@
             let savedUsername = getCookie("username");
             let savedPassword = getCookie("password");
             if (savedUsername && savedPassword) {
-                document.getElementById('username').value = savedUsername;
-                document.getElementById('password').value = savedPassword;
+                document.getElementById('username').value = decodeURIComponent(savedUsername);
+                document.getElementById('password').value = decodeURIComponent(savedPassword);
             }
         }
 
@@ -71,8 +67,8 @@
             let username = document.getElementById('username').value;
             let password = document.getElementById('password').value;
             if (username === "hareemalii786@gmail.com" && password === "12345") {
-                setCookie("username", username, 30);
-                setCookie("password", password, 30);
+                setCookie("username", encodeURIComponent(username), 30);
+                setCookie("password", encodeURIComponent(password), 30);
                 document.getElementById('loginPage').style.display = 'none';
                 document.getElementById('dashboard').style.display = 'block';
             } else {
@@ -84,8 +80,8 @@
             let username = document.getElementById('username').value;
             let password = document.getElementById('password').value;
             if (username === "admin@lgsjt.com" && password === "admin123") {
-                setCookie("username", username, 30);
-                setCookie("password", password, 30);
+                setCookie("username", encodeURIComponent(username), 30);
+                setCookie("password", encodeURIComponent(password), 30);
                 document.getElementById('loginPage').style.display = 'none';
                 document.getElementById('adminDashboard').style.display = 'block';
             } else {
